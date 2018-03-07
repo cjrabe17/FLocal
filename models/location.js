@@ -33,6 +33,8 @@ module.exports = function(sequelize, DataTypes) {
             defaultValue: false
         }
     });
+
+    return Locations;
 }
 
 // Something something still need foreign key. Primary key is adding by Sequelize
