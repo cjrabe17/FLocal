@@ -22,6 +22,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+// Set Handlebars
+var exphbs = require("express-handlebars");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 // Static directory
 app.use(express.static("public"));
 
@@ -29,6 +34,10 @@ app.use(express.static("public"));
 // =============================================================
 require("./routes/api-routes.js")(app);
 require("./routes/html-routes.js")(app);
+
+// Import routes and give the server access to them.
+var routes = require("./controllers/catsController.js");
+app.use(routes);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
