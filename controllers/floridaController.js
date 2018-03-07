@@ -5,7 +5,7 @@ var router = express.Router();
 //===================================
 
 //Import model (*.js) to use database functions
-var florida = require("<model goes here>");
+var florida = require("../models/location.js");
 //===================================
 
 //Create routes
