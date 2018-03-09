@@ -1,9 +1,26 @@
-  body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 
-  main {
-    flex: 1 0 auto;
-  }
+main {
+  flex: 1 0 auto;
+}
+
+a:hover {
+  font-size: 18px;
+}
+
+#logo {
+  font-size: 35px;
+  margin: 0px;
+}
+
+.page-footer {
+  padding-top: 0px;
+}
+
+.page-footer .footer-copyright {
+  background-color: #ee6e73;
+}
