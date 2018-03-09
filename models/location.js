@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var Locations = sequelize.define("locations", {
+    var Locations = sequelize.define("Locations", {
         location: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -12,20 +12,26 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true
         },
         website: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: true
+            // Try to validate for a URL
         },
         image: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: true
+            // Try to validate for a URL
         },
         phoneNumber: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: true
+            // Try to validate for numbers in phone number format
         },
         visited: {
-            type: DataTypes.NUMBER,
+            type: DataTypes.INTEGER,
             allowNull: true
         },
         recommended: {
-            type: DataTypes.NUMBER,
+            type: DataTypes.INTEGER,
             allowNull: true
         },
         approved: {
