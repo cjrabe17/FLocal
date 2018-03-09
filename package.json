@@ -1,21 +1,21 @@
 {
-  "name": "blog-crud",
+  "name": "node-handlebars-boilerplate",
   "version": "1.0.0",
-  "description": "",
+  "description": "A light weight nodeJS MVC boilerplate with handlebars and sequelize",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "watch": "nodemon server.js"
+    "start": "node server.js"
   },
-  "keywords": [],
-  "author": "Paul Herman, Aidan Clemente, Cassandra Rabe",
-  "license": "Awesome",
+  "author": "Christian Eckenrode",
+  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "express": "^4.14.0",
+    "express": "^4.16.2",
     "express-handlebars": "^3.0.0",
-    "mysql2": "^1.3.6",
-    "sequelize": "^4.35.1"
+    "method-override": "^2.3.10",
+    "mysql": "^2.11.1",
+    "mysql2": "^1.5.1",
+    "sequelize": "^4.29.2"
   }
 }
