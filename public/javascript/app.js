@@ -1,4 +1,10 @@
 $(document).ready(function() {
+    // Nav Bar drop down
+    $(".dropdown-button").dropdown( { hover: false } );    
+
+    // Dropdown selections for Request New Spot
+    $('select').material_select();
+    
     var destinationName = $("#destination_name");
     var destinationAddress = $("#destination_address");
     var destinationPhoneNumber = $("#destination_phoneNumber");
@@ -6,11 +12,7 @@ $(document).ready(function() {
     var destinationDescription = $("#destination_description");
     var destinationWebsite = $("#destination_website");
     var LocationsId;
-    //Gets the current list of destinations
-    getDestinations();
 
-    // Nav Bar drop down
-    $(".dropdown-button").dropdown( { hover: false } );
     $(document).on("click", "#submit", function(event) {
         event.preventDefault();
         // Wont submit the post if we are missing a body, title, or author
