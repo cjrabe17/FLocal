@@ -1,0 +1,42 @@
+<div id="formContainerDiv" class="row">
+    <form id="requestForm" class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="destination_name" type="text" required>
+                <label for="destination_name">Destination Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="destination_address" type="text" required>
+                <label for="destination_address">Destination Address</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="destination_phoneNumber" type="tel" pattern="\d{3}[\-]\d{3}[\-]\d{4}" title="Phone Number Format: 123-456-7899" class="validate">
+                <label for="destination_phoneNumber" data-error="Please enter a valid phone number Format: 123-456-7899" data-success="Thank you">Destination Phone Number</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="destination_image" type="url" title="URL Format: https://example.image.com" class="validate">
+                <label for="destination_image" data-error="Please submit a url for image Format: https://example.image.com" data-success="Thank you">Destination Image</label>
+            </div>
+        </div>
+    
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="destination_description" title="Description of destination being Requested" class="materialize-textarea"></textarea>
+                    <label for="destination_description">Destination Description</label>
+                </div>
+                </div>
+            </form>
+            </div>
+    </form>
+    <button class="btn waves-effect waves-light right" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+    </button>
+</div>
