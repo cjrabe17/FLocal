@@ -49,6 +49,26 @@ db.sequelize.sync( { force: true } ).then(function() {
     phoneNumber: "407-939-5277",
     approved: true
   });
+  db.Location.create({
+    destination: "SeaWorld",
+    address: "7007 Sea World Dr, Orlando, FL 32821",
+    description: "From park to planet, SeaWorld theme parks offer up-close animal experiences, roller coasters and, most importantly, a chance for you to make a difference.",
+    category: "Theme Park",
+    website: "http://www.seaworldorlando.com/",
+    image: "https://skift.com/wp-content/uploads/2016/08/OneOcean1-e1470320852427.jpg",
+    phoneNumber: "407-370-1239",
+    approved: true
+  });
+  db.Location.create({
+    destination: "Kennedy Space Center",
+    address: "SR 405 Kennedy Space Center, FL 32899",
+    description: "Kennedy Space Center Visitor Complex is where rockets launch and inspiration begins at Florida's gateway to space. Located one small step from Orlando, arrive early for a full-day experience at the greatest space adventure on Earth.",
+    category: "Museum",
+    website: "https://www.kennedyspacecenter.com/",
+    image: "https://skift.com/wp-content/uploads/2016/08/OneOcean1-e1470320852427.jpg",
+    phoneNumber: "321-867-5000",
+    approved: true
+  });
   app.listen(PORT, function() {
     console.info(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
