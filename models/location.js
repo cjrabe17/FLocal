@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var Locations = sequelize.define("Locations", {
+    var Location = sequelize.define("Location", {
         destination: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -44,7 +44,7 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
 
-    return Locations;
+    return Location;
 }
 
 // Something something still need foreign key. Primary key is adding by Sequelize
