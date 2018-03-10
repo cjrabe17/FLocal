@@ -15,6 +15,9 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.TEXT,
             allowNull: true
         },
+        category: {
+            type: DataTypes.STRING
+        },
         website: {
             type: DataTypes.STRING,
             allowNull: true

@@ -43,6 +43,7 @@ db.sequelize.sync().then(function() {
     destination: "Disney World",
     address: "Walt Disney World Resort, Orlando, FL 32830",
     description: "The happiest place on Earth.",
+    category: "Theme Park",
     website: "http://www.disney.com/",
     image: "https://lh5.googleusercontent.com/p/AF1QipOFedS1w6xKzGKRWzMxcOMjM7raNKsTah5UrfK0=w408-h544-k-no",
     phoneNumber: "407-939-5277",
