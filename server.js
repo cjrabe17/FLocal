@@ -38,7 +38,7 @@ require("./routes/apiRoutes")(app);
 app.use("/auth", authRoutes);
 
 // Starting the server, syncing our models ------------------------------------/
-db.sequelize.sync().then(function() {
+db.sequelize.sync( { force: true } ).then(function() {
   db.Location.create({
     destination: "Disney World",
     address: "Walt Disney World Resort, Orlando, FL 32830",
