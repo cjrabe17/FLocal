@@ -4,6 +4,8 @@ var exphbs = require("express-handlebars");
 var methodOverride = require("method-override");
 
 var db = require("./models");
+// To import OAuth routes file
+var authRoutes = require("./routes/auth-routes");
 
 var app = express();
 var PORT = process.env.PORT || 3000;
@@ -31,6 +33,9 @@ app.set("view engine", "handlebars");
 // Route config -------------------------------------------/
 require("./routes/htmlRoutes")(app);
 require("./routes/apiRoutes")(app);
+
+// To use the OAuth file
+app.use("/auth", authRoutes);
 
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync().then(function() {
