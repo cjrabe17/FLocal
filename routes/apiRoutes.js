@@ -5,20 +5,20 @@ module.exports = function(app) {
   // GET route for getting all of the user requests
   app.get("/api/requestnewspot", function(req, res) {
     var query = {};
-    if (req.query.Locations_id) {
-      query.LocationsId = req.query.Locations_id;
+    if (req.query.location_id) {
+      query.LocationId = req.query.Location_id;
     }
-    db.Locations.findAll({
+    db.Location.findAll({
       where: query,
-    }).then(function(dbLocations) {
-      res.json(dbLocations);
+    }).then(function(dblocation) {
+      res.json(dblocation);
     });
   });
-  // POST route for saving a new locations to the database
+  // POST route for saving a new location to the database
   app.post("/api/requestnewspot", function(req, res) {
     console.log(req.body);
-    db.Locations.create(req.body).then(function(dbLocations) {
-      res.json(dbLocations);
+    db.Location.create(req.body).then(function(dblocation) {
+      res.json(dblocation);
     });
   });
 }
