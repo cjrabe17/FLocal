@@ -13,15 +13,9 @@ module.exports = User;
 // Sequelize this later
 
 // module.exports = function(sequelize, DataTypes) {
- 
 //     var User = sequelize.define('user', {
- 
 //         username: DataTypes.STRING,
 //         googleId: DataTypes.STRING
- 
- 
 //     });
- 
 //     return User;
- 
 // }
