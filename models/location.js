@@ -50,4 +50,4 @@ module.exports = function(sequelize, DataTypes) {
     return Location;
 }
 
-// Something something still need foreign key. Primary key is adding by Sequelize
+// Something something still need foreign key. Primary key is added by Sequelize
