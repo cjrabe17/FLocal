@@ -1,5 +1,11 @@
 <div class="input-group-append">
+<<<<<<< HEAD
     <form>
         <button id="delete" data-id="{{ id }}">delete</button>
+=======
+    <form action="/Location/update/{{this.id}}?_method=PUT" method="POST">
+        <input type="hidden" name="approve" value="true">
+        <button class="approve" data-id="{{id}}" data-approve="{{approved}}">Discard</button>
+>>>>>>> b7756e541f30822667dc730fa547ab3cf4539673
     </form>
 </div>

@@ -5,12 +5,13 @@ var User = require("../models/user-model");
 
 passport.serializeUser((user, done) => {
     // Grabbing id from DB's primary key
+    console.log(user);
     done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
     User.findById(id).then((user) => {
-        done(null, user.id);
+        done(null, user);
     });
 });
 
