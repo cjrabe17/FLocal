@@ -1,6 +1,6 @@
 <h3 class="center-align">Destinations needing approval</h3>
-
-{{#each locations}}     
+<div class="row col s12">
+    {{#each locations}}     
         {{#unless approved}} 
             <div class="card sticky-action col s12 m6" style="margin:20px; width:300px">
                 <div class="card-image waves-effect waves-block waves-light">
@@ -24,4 +24,6 @@
                 {{> approveButton}}
             </div>
         {{/unless}}   
-    {{/each}}    
+    {{/each}} 
+</div>
+   
