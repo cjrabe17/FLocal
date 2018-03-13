@@ -87,6 +87,4 @@ db.sequelize.sync( { force: true } ).then(function() {
             PORT
         );
     });
-}).catch(function(err) {
-    console.log(err, "Something went wrong with the Database Update!");
 });
