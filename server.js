@@ -89,7 +89,7 @@ db.sequelize.sync( { force: true } ).then(function() {
     description: "Kennedy Space Center Visitor Complex is where rockets launch and inspiration begins at Florida's gateway to space. Located one small step from Orlando, arrive early for a full-day experience at the greatest space adventure on Earth.",
     category: "Museum",
     website: "https://www.kennedyspacecenter.com/",
-    image: "https://skift.com/wp-content/uploads/2016/08/OneOcean1-e1470320852427.jpg",
+    image: "https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzAxMy82MTUvb3JpZ2luYWwva3NjLXZpc2l0b3ItY29tcGxleC1wcmVwYXJpbmctc2h1dHRsZS1kaXNwbGF5LmpwZw== ",
     phoneNumber: "321-867-5000",
     approved: true
   });
@@ -101,6 +101,16 @@ db.sequelize.sync( { force: true } ).then(function() {
     website: "https://www.gatorland.com/",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGukQNYsQDy3223U2NCEkTQ9C43txOIThOXA7cE6P2zNP5k78q",
     phoneNumber: "407-855-5496",
+    approved: false
+  });
+  db.Location.create({
+    destination: "Central Florida Zoo & Botanical Gardens ",
+    address: "3755 NW Hwy 17-92, Sanford, FL 32771",
+    description: "Enter the lush tropical world of the Central Florida Zoo & Botanical Gardens.  A relaxing, entertaining and educational experience for the entire family. The Zoo cares for over 400 animals, representing over 150 species, many of which you can see during your visit to the Zoo. You can take to the sky and enjoy an aerial adventure course, ZOOm Air Adventure Park or bring your flip-flops and swimsuit to cool-off in the Wharton-Smith Tropical Splash Ground.",
+    category: "Outdoor, Family Friendly",
+    website: "http://www.centralfloridazoo.org/",
+    image: "https://media-cdn.tripadvisor.com/media/photo-s/06/16/c8/cc/central-florida-zoo-botanical.jpg",
+    phoneNumber: "407-323-4450",
     approved: false
   });
   app.listen(PORT, function() {
