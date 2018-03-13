@@ -22,6 +22,20 @@ module.exports = function(app) {
       res.json(dblocation);
     });
   });
+  // PUT route for updating locations
+  app.put("/api/requestnewspot/", function(req, res) {
+    console.log(req.body);
+    db.Location.update(
+      req.body,
+      {
+        where: {
+          id: req.body.id
+        }
+      }).then(function(dbLocations) {
+      res.json(dbLocations);
+    });
+  });
+
 }
 
 
