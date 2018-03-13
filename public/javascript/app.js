@@ -35,6 +35,19 @@ $(document).ready(function() {
         console.log(newDestination);
         console.log("Listener Works!");
     });
+    $(document).on("click", "#approve", function(event) {
+        event.preventDefault();
+        var id = $(this).data("id");
+        console.log("This is the ID: " + id);
+        $.ajax({
+            method: "PUT",
+            url: "/api/requestnewspot/",
+            data: { approved: true, id: id }
+          })
+            .then(function() {
+              window.location.href = "/adminPage";
+            });
+    })
 
     function upsertDestination(newDestination) {
         $.post("/api/requestnewspot", newDestination)
@@ -62,7 +75,19 @@ $(document).ready(function() {
         nameInput.val("");
         });
     }
+    function updatePost(location) {
+        $.ajax({
+          method: "PUT",
+          url: "/api/requestnewspot/",
+          data: location
+        })
+          .then(function() {
+            window.location.href = "/adminPage?id=" + currentPost.id;
+          });
+      }
+      
 });
+
 
 // $(document).on("click", ".resetButton",
 
