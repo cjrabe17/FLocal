@@ -6,7 +6,9 @@ var methodOverride = require("method-override");
 var db = require("./models");
 // To import OAuth routes file
 var authRoutes = require("./routes/auth-routes");
-// To get Passport running
+// To import profile routes file
+var profileRoutes = require("./routes/profile-routes");
+// To use Passport
 var passportSetup = require("./config/passport-setup");
 // Mongoose for MongoDB--might be getting rid of later
 var mongoose = require("mongoose");
@@ -58,8 +60,9 @@ mongoose.connect(keys.mongodb.dbURI, () => {
     console.log("Connected to mongoDB");
 });
 
-// To use the OAuth file
+// Setup authentication routes
 app.use("/auth", authRoutes);
+app.use("/profile", profileRoutes);
 
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync( { force: true } ).then(function() {
