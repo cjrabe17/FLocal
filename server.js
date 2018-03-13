@@ -12,6 +12,10 @@ var passportSetup = require("./config/passport-setup");
 var mongoose = require("mongoose");
 // Importing keys file
 var keys = require("./config/keys");
+// To store auth info in browser
+var cookieSession = require("cookie-session");
+// Passport auth npm
+var passport = require("passport");
 
 var app = express();
 var PORT = process.env.PORT || 3000;
@@ -39,6 +43,15 @@ app.set("view engine", "handlebars");
 // Route config -------------------------------------------/
 require("./routes/htmlRoutes")(app);
 require("./routes/apiRoutes")(app);
+
+app.use(cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [keys.session.cookieKey]
+}));
+
+// initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // connect to mongoDB
 mongoose.connect(keys.mongodb.dbURI, () => {
