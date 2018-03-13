@@ -90,6 +90,16 @@ db.sequelize.sync( { force: true } ).then(function() {
     phoneNumber: "407-855-5496",
     approved: false
   });
+  db.Location.create({
+    destination: "Central Florida Zoo & Botanical Gardens ",
+    address: "3755 NW Hwy 17-92, Sanford, FL 32771",
+    description: "Enter the lush tropical world of the Central Florida Zoo & Botanical Gardens.  A relaxing, entertaining and educational experience for the entire family. The Zoo cares for over 400 animals, representing over 150 species, many of which you can see during your visit to the Zoo. You can take to the sky and enjoy an aerial adventure course, ZOOm Air Adventure Park or bring your flip-flops and swimsuit to cool-off in the Wharton-Smith Tropical Splash Ground.",
+    category: "Outdoor, Family Friendly",
+    website: "http://www.centralfloridazoo.org/",
+    image: "https://www.google.com/search?q=central+florida+zoo+%26+botanical+gardens+sanford+fl&rlz=1C1XYJR_enUS764US765&source=lnms&tbm=isch&sa=X&ved=0ahUKEwin-4Td0OnZAhXKulMKHfC3DWMQ_AUICygC&biw=1536&bih=734#imgdii=i-YL5aPZnry8ZM:&imgrc=tf89I2FySvqiVM:",
+    phoneNumber: "407-323-4450",
+    approved: false
+  });
   app.listen(PORT, function() {
     console.info(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
