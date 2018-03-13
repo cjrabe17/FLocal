@@ -6,6 +6,12 @@ var methodOverride = require("method-override");
 var db = require("./models");
 // To import OAuth routes file
 var authRoutes = require("./routes/auth-routes");
+// To get Passport running
+var passportSetup = require("./config/passport-setup");
+// Mongoose for MongoDB--might be getting rid of later
+var mongoose = require("mongoose");
+// Importing keys file
+var keys = require("./config/keys");
 
 var app = express();
 var PORT = process.env.PORT || 3000;
@@ -23,16 +29,21 @@ app.use(express.static("public"));
 
 // Handlebars config ---------------------------------------/
 app.engine(
-  "handlebars",
-  exphbs({
-    defaultLayout: "main"
-  })
+    "handlebars",
+    exphbs({
+        defaultLayout: "main"
+    })
 );
 app.set("view engine", "handlebars");
 
 // Route config -------------------------------------------/
 require("./routes/htmlRoutes")(app);
 require("./routes/apiRoutes")(app);
+
+// connect to mongoDB
+mongoose.connect(keys.mongodb.dbURI, () => {
+    console.log("Connected to mongoDB");
+});
 
 // To use the OAuth file
 app.use("/auth", authRoutes);
