@@ -2,6 +2,7 @@
 var db = require("../models");
 
 module.exports = function(app) {
+
   // GET route for getting all of the user requests
   app.get("/api/requestnewspot", function(req, res) {
     var query = {};

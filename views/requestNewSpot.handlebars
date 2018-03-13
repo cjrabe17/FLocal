@@ -26,23 +26,31 @@
         </div>
         <div class="row">
             <div class="input-field col s12">
+                <input id="destination_website" type="url" title="URL Format: https://example.website.com" class="validate">
+                <label for="destination_website" data-error="Please submit a url for website Format: https://example.website.com" data-success="Valid">Website &nbsp URL Format: https://example.website.com</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
                 <textarea id="destination_description" title="Description of destination being Requested" class="materialize-textarea"></textarea>
                 <label for="destination_description">Destination Description</label>
             </div>
         </div>
-         <div class="input-field col s12 m6" required>
-            <select multiple>
-                <option value="" disabled selected>Choose all that apply</option>
-                <option value="1">Family Friendly</option>
-                <option value="2">Outdoor</option>
-                <option value="3">Theme Park</option>
-                <option value="4">Museum</option>
-                <option value="5">Beach</option>
-                <option value="6">Entertainment</option>
-                <option value="7">Restaurant</option>
-            </select>
-            <label>Destination Categories (Required)</label>
-        </div>
+        <div class="row">
+            <div class="input-field col s12 m6" required>
+                <select multiple>
+                    <option value="" disabled selected>Choose all that apply</option>
+                    <option value="1">Family Friendly</option>
+                    <option value="2">Outdoor</option>
+                    <option value="3">Theme Park</option>
+                    <option value="4">Museum</option>
+                    <option value="5">Beach</option>
+                    <option value="6">Entertainment</option>
+                    <option value="7">Restaurant</option>
+                </select>
+                <label>Destination Categories (Required)</label>
+            </div>
+        </div>        
     </form>
     <button class="btn waves-effect waves-light right" id="submit" type="submit" name="submit">Submit
         <i class="material-icons right">send</i>

@@ -1,22 +1,7 @@
- {{!-- For the cards: will need an each statement to loop through the desitnation in Locations Table --}}
- 
- <div class="row col s12">
-    {{!-- <div class="card sticky-action col s12 m6" style="margin:20px; width:300px">
-        <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="/assets/img/cat.jpg">
-        </div>
-        <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Kitten<i class="material-icons right">more_vert</i></span>
-            <p><a href="#">This is a link</a></p>
-        </div>
-        <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Kitten<i class="material-icons right">close</i></span>
-            <p>Here is some more information about this product that is only revealed once clicked on.</p>
-        </div>
-    </div> --}}
+<h3 class="center-align">Destinations needing approval</h3>
 
-    {{#each locations}}     
-        {{#if approved}} 
+{{#each locations}}     
+        {{#unless approved}} 
             <div class="card sticky-action col s12 m6" style="margin:20px; width:300px">
                 <div class="card-image waves-effect waves-block waves-light">
                     <img class="activator" src="{{this.image}}">
@@ -36,9 +21,7 @@
                     <p>Destination Description:</p>
                     <p>{{this.description}}</p>
                 </div>
+                {{> approveButton}}
             </div>
-        {{/if}}   
+        {{/unless}}   
     {{/each}}    
-
-</div>  
-<script src="/javascript/app.js"></script>
