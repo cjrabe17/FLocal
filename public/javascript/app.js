@@ -1,10 +1,4 @@
 $(document).ready(function() {
-//--------------  index.handlebars  ----------------------------------
-    // Nav Bar drop down
-    $(".dropdown-button").dropdown( { hover: false } );    
-
-    // Dropdown selections for Request New Spot
-    $('select').material_select();
 
 //--------------  Request New Spot  -----------------------------------
     var destinationName = $("#destination_name");
@@ -14,7 +8,8 @@ $(document).ready(function() {
     var destinationDescription = $("#destination_description");
     var destinationWebsite = $("#destination_website");
     var LocationsId;
-
+    $(document).on("click", "#delete", handleLocationDelete);
+    $(document).on("click", "#approve", handleLocationUpdate);
     $(document).on("click", "#submit", function(event) {
         event.preventDefault();
         // Wont submit the post if we are missing a body, title, or author
@@ -27,17 +22,13 @@ $(document).ready(function() {
             destination: destinationName.val().trim(),
             address: destinationAddress.val().trim(),
             description: destinationDescription.val().trim(),
-            // website: destinationWebsite.val().trim(),
+            website: destinationWebsite.val().trim(),
             image: destinationImage.val().trim(),
-            phoneNumber: destinationPhoneNumber.val().trim()
+            phoneNumber: destinationPhoneNumber.val().trim(),
+            category: $("#destination_category option:checked").val()
         });
-
-        console.log(newDestination);
-        console.log("Listener Works!");
+        location.reload();
     });
-    $(document).on("click", "#delete", handleLocationDelete);
-    $(document).on("click", "#approve", handleLocationUpdate);
-
     function upsertDestination(newDestination) {
         $.post("/api/requestnewspot", newDestination)
           .then(getDestinations);
@@ -51,17 +42,17 @@ $(document).ready(function() {
         newTr.append("<td> " + destinationData.description + "</td>");
         newTr.append("<td> " + destinationData.image + "</td>");
         newTr.append("<td> " + destinationData.phoneNumber + "</td>");
+        newTr.append("<td> " + destinationData.website + "</td>");
+        newTr.append("<td> " + destinationData.category + "</td>");
         return newTr;
     }
     // Function for retrieving destinations and getting them ready to be rendered to the page
     function getDestinations() {
         $.get("/api/requestnewspot", function(data) {
         var rowsToAdd = [];
-        for (var i = 0; i < data.length; i++) {
-            rowsToAdd.push(createDestinationRow(data[i]));
-        }
-        renderAuthorList(rowsToAdd);
-        nameInput.val("");
+            for (var i = 0; i < data.length; i++) {
+                rowsToAdd.push(createDestinationRow(data[i]));
+            }
         });
     }
     function handleLocationDelete(event) {
@@ -91,6 +82,4 @@ $(document).ready(function() {
     };
 });
 
-
-// $(document).on("click", ".resetButton",
 
