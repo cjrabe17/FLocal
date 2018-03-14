@@ -8,10 +8,10 @@ module.exports = {
       }
     }).then(function(location_data) {
       var hbsObject = { locations: location_data };
-      // console.log("------ Location Data -------");
-      // console.log(hbsObject);
-      // console.log("--------------------------");
-      // res.render("index", hbsObject);
+      console.log("------ Location Data -------");
+      console.log(hbsObject);
+      console.log("--------------------------");
+      res.render("index", hbsObject);
     });
   },
   renderAdminPage: function(req, res) {
