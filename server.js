@@ -46,10 +46,10 @@ app.set("view engine", "handlebars");
 require("./routes/htmlRoutes")(app);
 require("./routes/apiRoutes")(app);
 
-// app.use(cookieSession({
-//     maxAge: 24 * 60 * 60 * 1000,
-//     keys: [keys.session.cookieKey]
-// }));
+app.use(cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [keys.session.cookieKey]
+}));
 
 // initialize passport
 app.use(passport.initialize());
