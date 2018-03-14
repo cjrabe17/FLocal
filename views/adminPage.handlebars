@@ -21,7 +21,11 @@
                     <p>Destination Description:</p>
                     <p>{{this.description}}</p>
                 </div>
-                {{> approveButton}}
+                <div class="row col s12">
+                    {{> approveButton}}
+                    {{> discardButton}}
+                    {{> editButton}}
+                </div>
             </div>
         {{/unless}}   
     {{/each}} 
