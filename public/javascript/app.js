@@ -35,19 +35,8 @@ $(document).ready(function() {
         console.log(newDestination);
         console.log("Listener Works!");
     });
-    $(document).on("click", "#approve", function(event) {
-        event.preventDefault();
-        var id = $(this).data("id");
-        console.log("This is the ID: " + id);
-        $.ajax({
-            method: "PUT",
-            url: "/api/requestnewspot/",
-            data: { approved: true, id: id }
-          })
-            .then(function() {
-              window.location.href = "/adminPage";
-            });
-    })
+    $(document).on("click", "#delete", handleLocationDelete);
+    $(document).on("click", "#approve", handleLocationUpdate);
 
     function upsertDestination(newDestination) {
         $.post("/api/requestnewspot", newDestination)
@@ -75,17 +64,31 @@ $(document).ready(function() {
         nameInput.val("");
         });
     }
-    function updatePost(location) {
+    function handleLocationDelete(event) {
+        event.preventDefault();
+        var id = $(this).data("id");
+        console.log("test");
         $.ajax({
-          method: "PUT",
-          url: "/api/requestnewspot/",
-          data: location
+          method: "DELETE",
+          url: "/api/requestnewspot/" + id
         })
           .then(function() {
-            window.location.href = "/adminPage?id=" + currentPost.id;
+            window.location.href = "/adminPage";
           });
       }
-      
+      function handleLocationUpdate() {
+        event.preventDefault();
+        var id = $(this).data("id");
+        console.log("This is the ID: " + id);
+        $.ajax({
+            method: "PUT",
+            url: "/api/requestnewspot/",
+            data: { approved: true, id: id }
+          })
+            .then(function() {
+              window.location.href = "/adminPage";
+            });
+    };
 });
 
 
