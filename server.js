@@ -112,10 +112,6 @@ db.sequelize.sync( { force: true } ).then(function() {
     approved: false
   });
   app.listen(PORT, function() {
-    console.info(
-      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
-      PORT,
-      PORT
-    );
+    console.log("App listening on PORT: " + PORT);
   });
 });
