@@ -8,10 +8,11 @@ $(document).ready(function() {
     var destinationDescription = $("#destination_description");
     var destinationWebsite = $("#destination_website");
     var LocationsId;
-    $(document).on("click", "#delete", handleLocationDelete);
-    $(document).on("click", "#approve", handleLocationUpdate);
-    $(document).on("click", "#submit", function(event) {
+    $("#delete").on("click", handleLocationDelete);
+    $("#approve").on("click", handleLocationUpdate);
+    $("#submit").on("click", function(event) {
         event.preventDefault();
+        console.log("click event!");
         // Wont submit the post if we are missing a body, title, or author
         if (!destinationName.val().trim() || !destinationAddress.val().trim()) {
             // Have a model pop up to tell the user to fill out the missing pieces
@@ -27,9 +28,10 @@ $(document).ready(function() {
             phoneNumber: destinationPhoneNumber.val().trim(),
             category: $("#destination_category option:checked").val()
         });
-        location.reload();
+        // location.reload();
     });
     function upsertDestination(newDestination) {
+        console.log("post request!");
         $.post("/api/requestnewspot", newDestination)
           .then(getDestinations);
       }
