@@ -1,7 +1,7 @@
 var passport = require("passport");
 var GoogleStrategy = require("passport-google-oauth20");
 var keys = require("./keys");
-var User = require("../models/user-model");
+var db = require("../models");
 
 passport.serializeUser((user, done) => {
     // Grabbing id from DB's primary key
@@ -10,7 +10,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-    User.findById(id).then((user) => {
+    db.User.findById(id).then((user) => {
         done(null, user);
     });
 });
@@ -22,7 +22,7 @@ passport.use(
         clientID: keys.google.clientID,
         clientSecret: keys.google.clientSecret
     }, (accessToken, refreshToken, profile, done) => {
-        User.findOne({
+        db.User.findOne({
             where: {
                 googleId: profile.id
             }
@@ -38,7 +38,7 @@ passport.use(
                     thumbnail: profile._json.image.url,
                     adminAccess: false
                 };
-                User.create(data).then(function(newUser, created) {
+                db.User.create(data).then(function(newUser, created) {
                     if (!newUser) {
                         return done(null, false);
                     }
