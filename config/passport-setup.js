@@ -1,7 +1,7 @@
 var passport = require("passport");
 var GoogleStrategy = require("passport-google-oauth20");
 var keys = require("./keys");
-var User = require("../models/user-model");
+var db = require("../models");
 
 passport.serializeUser((user, done) => {
     // Grabbing id from DB's primary key
@@ -10,7 +10,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-    User.findById(id).then((user) => {
+    db.User.findById(id).then((user) => {
         done(null, user);
     });
 });
@@ -22,20 +22,30 @@ passport.use(
         clientID: keys.google.clientID,
         clientSecret: keys.google.clientSecret
     }, (accessToken, refreshToken, profile, done) => {
-        // check if user already exists in db
-        User.findOne({googleId: profile.id}).then((currentUser) => {
-            if (currentUser) {
-                // already have user in the db
-                console.log("Existing user is: ", currentUser);
-                done(null, currentUser);
+        db.User.findOne({
+            where: {
+                googleId: profile.id
+            }
+        }).then(function(user) {
+            if (user) {
+                return done(null, false, {
+                    message: "that user already exists"
+                });
             } else {
-                // if not, create one in our db
-                new User({
+                var data = {
+                    googleId: profile.id,
                     username: profile.displayName,
-                    googleId: profile.id
-                }).save().then((newUser) => {
-                    console.log("New user created:" + newUser);
-                    done(null, newUser);
+                    thumbnail: profile._json.image.url,
+                    adminAccess: false
+                };
+                db.User.create(data).then(function(newUser, created) {
+                    if (!newUser) {
+                        return done(null, false);
+                    }
+
+                    if (newUser) {
+                        return done(null, newUser);
+                    }
                 });
             }
         });

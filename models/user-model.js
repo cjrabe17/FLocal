@@ -1,21 +1,19 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+module.exports = function(sequelize, DataTypes) {
+    var User = sequelize.define('User', {
+        username: {
+            type: DataTypes.STRING
+        },
+        googleId: {
+            type: DataTypes.STRING
+        },
+        thumbnail: {
+            type: DataTypes.STRING
+        },
+        adminAccess: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        }
+    });
 
-var userSchema = new Schema({
-    username: String,
-    googleId: String
-});
-
-var User = mongoose.model("user", userSchema);
-
-module.exports = User;
-
-// Sequelize this later
-
-// module.exports = function(sequelize, DataTypes) {
-//     var User = sequelize.define('user', {
-//         username: DataTypes.STRING,
-//         googleId: DataTypes.STRING
-//     });
-//     return User;
-// }
+    return User;
+}
