@@ -19,7 +19,6 @@ var passport = require("passport");
 
 var app = express();
 
-if (process.env.JAWSDB_URL) 
 var PORT = process.env.PORT || 3000;
 
 // Method override for RESTFul form submissions
