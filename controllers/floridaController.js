@@ -8,9 +8,6 @@ module.exports = {
       }
     }).then(function(location_data) {
       var hbsObject = { locations: location_data, user: req.user };
-      console.log("------ Location Data -------");
-      console.log(hbsObject);
-      console.log("--------------------------");
       res.render("index", hbsObject);
     });
   },
@@ -20,10 +17,7 @@ module.exports = {
         approved: 0
       }
     }).then(function(location_data) {
-      var hbsObject = { locations: location_data };
-      // console.log("------ Location Data -------");
-      // console.log(hbsObject);
-      // console.log("--------------------------");
+      var hbsObject = { locations: location_data, user: req.user };
       res.render("adminPage", hbsObject);
     });
   },
@@ -36,7 +30,6 @@ module.exports = {
   createUserForm: function(req, res) {
     res.render("createUserForm");
   },
-
   approveDesitnation: function(req, res) {
     var condition = "id = " + req.params.id;
 
