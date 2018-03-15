@@ -22,22 +22,30 @@ passport.use(
         clientID: keys.google.clientID,
         clientSecret: keys.google.clientSecret
     }, (accessToken, refreshToken, profile, done) => {
-        console.log(profile);
-        // check if user already exists in db
-        User.findOne({googleId: profile.id}).then((currentUser) => {
-            if (currentUser) {
-                // already have user in the db
-                console.log("Existing user is: ", currentUser);
-                done(null, currentUser);
+        User.findOne({
+            where: {
+                googleId: profile.id
+            }
+        }).then(function(user) {
+            if (user) {
+                return done(null, false, {
+                    message: "that user already exists"
+                });
             } else {
-                // if not, create one in our db
-                new User({
-                    username: profile.displayName,
+                var data = {
                     googleId: profile.id,
-                    thumbnail: profile._json.image.url
-                }).save().then((newUser) => {
-                    console.log("New user created:" + newUser);
-                    done(null, newUser);
+                    username: profile.displayName,
+                    thumbnail: profile._json.image.url,
+                    adminAccess: false
+                };
+                User.create(data).then(function(newUser, created) {
+                    if (!newUser) {
+                        return done(null, false);
+                    }
+
+                    if (newUser) {
+                        return done(null, newUser);
+                    }
                 });
             }
         });

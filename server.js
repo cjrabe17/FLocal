@@ -10,8 +10,6 @@ var authRoutes = require("./routes/auth-routes");
 var profileRoutes = require("./routes/profile-routes");
 // To use Passport
 var passportSetup = require("./config/passport-setup");
-// Mongoose for MongoDB--might be getting rid of later
-var mongoose = require("mongoose");
 // Importing keys file
 var keys = require("./config/keys");
 // To store auth info in browser
@@ -46,6 +44,7 @@ app.set("view engine", "handlebars");
 require("./routes/htmlRoutes")(app);
 require("./routes/apiRoutes")(app);
 
+// browser cookie is available for 24 hours in milliseconds
 app.use(cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
     keys: [keys.session.cookieKey]
@@ -54,11 +53,6 @@ app.use(cookieSession({
 // initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
-
-// connect to mongoDB
-mongoose.connect(keys.mongodb.dbURI, () => {
-    console.log("Connected to mongoDB");
-});
 
 // Setup authentication routes
 app.use("/auth", authRoutes);
