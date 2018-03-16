@@ -19,16 +19,56 @@ $(document).ready(function() {
     var destinationWebsite = $("#destination_website");
     var destinationCategory = $(".select-dropdown");
     var LocationsId;
+    var modalEdit = $("#modalEdit");
 
+// ----------- Work in Progress Start! -------------------------------------
+    // Submit Edit Modal
+    $(modalEdit).on("click", "#submitModalEdit", function(event) {
+        event.preventDefault();
+
+        destinationName = $("#destination_name");
+        destinationAddress = $("#destination_address");
+        destinationPhoneNumber = $("#destination_phoneNumber");
+        destinationImage = $("#destination_image");
+        destinationDescription = $("#destination_description");
+        destinationWebsite = $("#destination_website");
+        
+
+        upDateRequest({
+
+        })
+    })
+
+// ***************  Using for example  ************************
+//Note: this was moved into the controllers file into a method
+    // $(document).on("click", "#approve", function(event) {
+    //     event.preventDefault();
+    //     var id = $(this).data("id");
+    //     // console.log("This is the ID: " + id);
+
+    //     $.ajax({
+    //         method: "PUT",
+    //         url: "/api/requestnewspot/",
+    //         data: { approved: true, id: id }
+    //     })
+    //     .then(function() {
+    //         window.location.href = "/adminPage";
+    //     });
+    // });
+// ----------- Work in Progress End-------------------------------------
 
 
     $("#delete").on("click", handleLocationDelete);
     $("#approve").on("click", handleLocationUpdate);
+
+    // Submit Request New Spot
     $("#submit").on("click", function(event) {
         event.preventDefault();
-        // Wont submit the post if we are missing a body, title, or author
+        // Wont submit the post if we are missing a desitnation name or address
         if (!destinationName.val().trim() || !destinationAddress.val().trim()) {
-            // Have a model pop up to tell the user to fill out the missing pieces
+            
+            // Change this to a modal
+            alert("Please fill out all required areas");
             return;
         }
         // Constructing a newLocation object to hand to the database
@@ -43,11 +83,13 @@ $(document).ready(function() {
         });
         location.reload();
     });
+
     //Pushes the new request to the database
     function upsertDestination(newDestination) {
         $.post("/api/requestnewspot", newDestination)
-          .then(getDestinations);
-      }
+        .then(getDestinations);
+    };
+
     // Function for creating a new list row for new destinations
     function createDestinationRow(destinationData) {
         var newTr = $("<tr>");
@@ -60,7 +102,8 @@ $(document).ready(function() {
         newTr.append("<td> " + destinationData.website + "</td>");
         newTr.append("<td> " + destinationData.category + "</td>");
         return newTr;
-    }
+    };
+
     // Function for retrieving destinations and getting them ready to be rendered to the page
     function getDestinations() {
         $.get("/api/requestnewspot", function(data) {
