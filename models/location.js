@@ -15,8 +15,33 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.TEXT,
             allowNull: true
         },
-        category: {
-            type: DataTypes.STRING
+        family_friendly: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        outdoor: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        theme_park: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        restaurant: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        beach: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        museum: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        entertainment: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
         website: {
             type: DataTypes.STRING,
