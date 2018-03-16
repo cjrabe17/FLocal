@@ -1,6 +1,7 @@
 <div class="input-group-append">
-    <form>
+    <form id="editForm" class="col s4">
         <input type="hidden" name="approve" value="true">
-        <button id="edit" data-id="{{ id }}">edit</button>
+        <!-- Modal Trigger -->
+        <button data-target="modal{{ id }}" class="modal-trigger" id="edit" data-id="{{ id }}">Modal</button>
     </form>
 </div>
