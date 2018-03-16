@@ -74,5 +74,3 @@ module.exports = function(sequelize, DataTypes) {
 
     return Location;
 }
-
-// Something something still need foreign key for User. Primary key is added by Sequelize

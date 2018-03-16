@@ -7,10 +7,7 @@ module.exports = {
         approved: 1
       }
     }).then(function(location_data) {
-      var hbsObject = { locations: location_data };
-      // console.log("------ Location Data -------");
-      // console.log(hbsObject);
-      // console.log("--------------------------");
+      var hbsObject = { locations: location_data, user: req.user };
       res.render("index", hbsObject);
     });
   },
@@ -20,10 +17,7 @@ module.exports = {
         approved: 0
       }
     }).then(function(location_data) {
-      var hbsObject = { locations: location_data };
-      // console.log("------ Location Data -------");
-      // console.log(hbsObject);
-      // console.log("--------------------------");
+      var hbsObject = { locations: location_data, user: req.user };
       res.render("adminPage", hbsObject);
     });
   },
@@ -36,5 +30,23 @@ module.exports = {
   createUserForm: function(req, res) {
     res.render("createUserForm");
   },
+  approveDesitnation: function(req, res) {
+    var condition = "id = " + req.params.id;
+
+    console.log("put condition: ", condition);
+
+    db.Location.update({
+        approved: true
+    }, condition, function(result) {
+      console.log("results from controller.js: " + result);
+        if (result.changedRows == 0) {
+          console.log("hello");
+            return res.status(404).end();
+        } else {
+            res.redirect("/adminPage");
+        }
+    });
+
+  }
 };
   

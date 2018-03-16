@@ -1,12 +1,12 @@
 $(document).ready(function() {
-//--------------  index.handlebars  ----------------------------------
-    // Nav Bar drop down
-    $(".dropdown-button").dropdown( { hover: false } );    
+//--------------  index.handlebars  -----------------------------------
+    //Nav Bar drop down
+    $(".dropdown-button").dropdown( { hover: false } );
 
-    // Dropdown selections for Request New Spot
-    $('select').material_select();
-    
-//----------------  For Edit Modal  -----------------------------`
+    //Dropdown selections for the Request New Spot
+    $("select").material_select();
+
+//--------------  For Edit Modal  -----------------------------------
 
     $('.modal').modal();
 
@@ -17,9 +17,11 @@ $(document).ready(function() {
     var destinationImage = $("#destination_image");
     var destinationDescription = $("#destination_description");
     var destinationWebsite = $("#destination_website");
+    var destinationCategory = $(".select-dropdown");
     var LocationsId;
     var modalEdit = $("#modalEdit");
 
+// ----------- Work in Progress Start! -------------------------------------
     // Submit Edit Modal
     $(modalEdit).on("click", "#submitModalEdit", function(event) {
         event.preventDefault();
@@ -37,8 +39,30 @@ $(document).ready(function() {
         })
     })
 
+// ***************  Using for example  ************************
+//Note: this was moved into the controllers file into a method
+    // $(document).on("click", "#approve", function(event) {
+    //     event.preventDefault();
+    //     var id = $(this).data("id");
+    //     // console.log("This is the ID: " + id);
+
+    //     $.ajax({
+    //         method: "PUT",
+    //         url: "/api/requestnewspot/",
+    //         data: { approved: true, id: id }
+    //     })
+    //     .then(function() {
+    //         window.location.href = "/adminPage";
+    //     });
+    // });
+// ----------- Work in Progress End-------------------------------------
+
+
+    $("#delete").on("click", handleLocationDelete);
+    $("#approve").on("click", handleLocationUpdate);
+
     // Submit Request New Spot
-    $(document).on("click", "#submit", function(event) {
+    $("#submit").on("click", function(event) {
         event.preventDefault();
         // Wont submit the post if we are missing a desitnation name or address
         if (!destinationName.val().trim() || !destinationAddress.val().trim()) {
@@ -52,31 +76,15 @@ $(document).ready(function() {
             destination: destinationName.val().trim(),
             address: destinationAddress.val().trim(),
             description: destinationDescription.val().trim(),
-            // website: destinationWebsite.val().trim(),
+            website: destinationWebsite.val().trim(),
             image: destinationImage.val().trim(),
-            phoneNumber: destinationPhoneNumber.val().trim()
+            phoneNumber: destinationPhoneNumber.val().trim(),
+            category: destinationCategory.val()
         });
-
-        console.log("New Desitination: " + newDestination);
+        location.reload();
     });
 
-    // Approve Button: Changes approved = true in database
-    $(document).on("click", "#approve", function(event) {
-        event.preventDefault();
-        var id = $(this).data("id");
-        // console.log("This is the ID: " + id);
-
-        $.ajax({
-            method: "PUT",
-            url: "/api/requestnewspot/",
-            data: { approved: true, id: id }
-        })
-        .then(function() {
-            window.location.href = "/adminPage";
-        });
-    });
-
-// +++++++++++ Is the the function that sends the newDestination to the db? +++++++++++
+    //Pushes the new request to the database
     function upsertDestination(newDestination) {
         $.post("/api/requestnewspot", newDestination)
         .then(getDestinations);
@@ -91,39 +99,45 @@ $(document).ready(function() {
         newTr.append("<td> " + destinationData.description + "</td>");
         newTr.append("<td> " + destinationData.image + "</td>");
         newTr.append("<td> " + destinationData.phoneNumber + "</td>");
-
-        console.log("New Table Row: " + newTr);
-
+        newTr.append("<td> " + destinationData.website + "</td>");
+        newTr.append("<td> " + destinationData.category + "</td>");
         return newTr;
     };
 
     // Function for retrieving destinations and getting them ready to be rendered to the page
     function getDestinations() {
         $.get("/api/requestnewspot", function(data) {
-            var rowsToAdd = [];
-
+        var rowsToAdd = [];
             for (var i = 0; i < data.length; i++) {
                 rowsToAdd.push(createDestinationRow(data[i]));
             }
-
-            renderAuthorList(rowsToAdd);
-            nameInput.val("");
         });
-    };
-
-    function updatePost(location) {
+    }
+    function handleLocationDelete(event) {
+        event.preventDefault();
+        var id = $(this).data("id");
+        console.log("test");
+        $.ajax({
+          method: "DELETE",
+          url: "/api/requestnewspot/" + id
+        })
+          .then(function() {
+            window.location.href = "/adminPage";
+          });
+      }
+      function handleLocationUpdate() {
+        event.preventDefault();
+        var id = $(this).data("id");
+        console.log("This is the ID: " + id);
         $.ajax({
             method: "PUT",
             url: "/api/requestnewspot/",
-            data: location
-        })
-        .then(function() {
-            window.location.href = "/adminPage?id=" + currentPost.id;
-        });
+            data: { approved: true, id: id }
+          })
+            .then(function() {
+              window.location.href = "/adminPage";
+            });
     };
-      
 });
 
-
-// $(document).on("click", ".resetButton",
 

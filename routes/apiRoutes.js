@@ -37,5 +37,22 @@ module.exports = function(app) {
       res.json(dbLocations);
     });
   });
+<<<<<<< HEAD
 
 };
+=======
+  //DELTE route for deleting locations
+  app.delete("/api/requestnewspot/:id", function(req, res) {
+    db.Location.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbLocation) {
+      res.json(dbLocation);
+    });
+  });
+}
+
+
+
+>>>>>>> master

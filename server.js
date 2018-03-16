@@ -10,8 +10,6 @@ var authRoutes = require("./routes/auth-routes");
 var profileRoutes = require("./routes/profile-routes");
 // To use Passport
 var passportSetup = require("./config/passport-setup");
-// Mongoose for MongoDB--might be getting rid of later
-var mongoose = require("mongoose");
 // Importing keys file
 var keys = require("./config/keys");
 // To store auth info in browser
@@ -20,6 +18,7 @@ var cookieSession = require("cookie-session");
 var passport = require("passport");
 
 var app = express();
+
 var PORT = process.env.PORT || 3000;
 
 // Method override for RESTFul form submissions
@@ -46,6 +45,7 @@ app.set("view engine", "handlebars");
 require("./routes/htmlRoutes")(app);
 require("./routes/apiRoutes")(app);
 
+// browser cookie is available for 24 hours in milliseconds
 app.use(cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
     keys: [keys.session.cookieKey]
@@ -55,16 +55,12 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// connect to mongoDB
-mongoose.connect(keys.mongodb.dbURI, () => {
-    console.log("Connected to mongoDB");
-});
-
 // Setup authentication routes
 app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
 
 // Starting the server, syncing our models ------------------------------------/
+<<<<<<< HEAD
 db.sequelize.sync( { force: true } ).then(function() {
   db.Location.create({
     destination: "Disney World",
@@ -118,11 +114,10 @@ db.sequelize.sync( { force: true } ).then(function() {
     phoneNumber: "407-323-4450",
     approved: false
   });
+=======
+db.sequelize.sync().then(function() {
+>>>>>>> master
   app.listen(PORT, function() {
-    console.info(
-      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
-      PORT,
-      PORT
-    );
+    console.log("App listening on PORT: " + PORT);
   });
 });
