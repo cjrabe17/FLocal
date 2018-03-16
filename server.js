@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Parse application/json
 app.use(bodyParser.json());
 // Static directory
-app.use(express.static(__dirname + "public"));
+app.use(express.static("public"));
 
 // Handlebars config ---------------------------------------/
 app.engine(
