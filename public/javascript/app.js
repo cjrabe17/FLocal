@@ -41,7 +41,7 @@ $(document).ready(function() {
             phoneNumber: destinationPhoneNumber.val().trim(),
             category: destinationCategory.val()
         });
-        // location.reload();
+        location.reload();
     });
     //Pushes the new request to the database
     function upsertDestination(newDestination) {
