@@ -1,4 +1,14 @@
 $(document).ready(function() {
+//--------------  index.handlebars  -----------------------------------
+    //Nav Bar drop down
+    $(".dropdown-button").dropdown( { hover: false } );
+
+    //Dropdown selections for the Request New Spot
+    $("select").material_select();
+
+//--------------  For Edit Modal  -----------------------------------
+
+    $('.modal').modal();
 
 //--------------  Request New Spot  -----------------------------------
     var destinationName = $("#destination_name");
@@ -7,12 +17,15 @@ $(document).ready(function() {
     var destinationImage = $("#destination_image");
     var destinationDescription = $("#destination_description");
     var destinationWebsite = $("#destination_website");
+    var destinationCategory = $(".select-dropdown");
     var LocationsId;
+
+
+
     $("#delete").on("click", handleLocationDelete);
     $("#approve").on("click", handleLocationUpdate);
     $("#submit").on("click", function(event) {
         event.preventDefault();
-        console.log("click event!");
         // Wont submit the post if we are missing a body, title, or author
         if (!destinationName.val().trim() || !destinationAddress.val().trim()) {
             // Have a model pop up to tell the user to fill out the missing pieces
@@ -26,12 +39,12 @@ $(document).ready(function() {
             website: destinationWebsite.val().trim(),
             image: destinationImage.val().trim(),
             phoneNumber: destinationPhoneNumber.val().trim(),
-            category: $("#destination_category option:checked").val()
+            category: destinationCategory.val()
         });
         // location.reload();
     });
+    //Pushes the new request to the database
     function upsertDestination(newDestination) {
-        console.log("post request!");
         $.post("/api/requestnewspot", newDestination)
           .then(getDestinations);
       }
