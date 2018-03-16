@@ -15,6 +15,7 @@ module.exports = function(app) {
       res.json(dblocation);
     });
   });
+
   // POST route for saving a new location to the database
   app.post("/api/requestnewspot", function(req, res) {
     console.log(req.body);
@@ -22,8 +23,9 @@ module.exports = function(app) {
       res.json(dblocation);
     });
   });
+
   // PUT route for updating locations
-  app.put("/api/requestnewspot/", function(req, res) {
+  app.put("/api/requestnewspot", function(req, res) {
     console.log(req.body);
     db.Location.update(
       req.body,
@@ -35,6 +37,10 @@ module.exports = function(app) {
       res.json(dbLocations);
     });
   });
+<<<<<<< HEAD
+
+};
+=======
   //DELTE route for deleting locations
   app.delete("/api/requestnewspot/:id", function(req, res) {
     db.Location.destroy({
@@ -49,3 +55,4 @@ module.exports = function(app) {
 
 
 
+>>>>>>> master
