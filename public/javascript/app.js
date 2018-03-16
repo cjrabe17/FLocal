@@ -19,42 +19,51 @@ $(document).ready(function() {
     var destinationWebsite = $("#destination_website");
     var destinationCategory = $(".select-dropdown");
     var LocationsId;
-    var modalEdit = $("#modalEdit");
 
 // ----------- Work in Progress Start! -------------------------------------
-    // Submit Edit Modal
-    $(modalEdit).on("click", "#submitModalEdit", function(event) {
-        event.preventDefault();
-
-        destinationName = $("#destination_name");
-        destinationAddress = $("#destination_address");
-        destinationPhoneNumber = $("#destination_phoneNumber");
-        destinationImage = $("#destination_image");
-        destinationDescription = $("#destination_description");
-        destinationWebsite = $("#destination_website");
+    var modalDestinationName = $("#modal_destination_name");
+    var modalDestinationAddress = $("#modal_destination_address");
+    var modalDestinationPhoneNumber = $("#modal_destination_phoneNumber");
+    var modalDestinationImage = $("#modal_destination_image");
+    var modalDestinationDescription = $("#modal_destination_description");
+    var modalDestinationWebsite = $("#modal_destination_website");
         
-
-        upDateRequest({
-
+// Edits the Request in Database
+function editModal() {
+    event.preventDefault();
+        var id = $(this).data("id");
+        console.log("This is the ID in the modal: " + id);
+        $.ajax({
+            method: "PUT",
+            url: "/adminPage",
+            data: { 
+                id: id,
+                destination: modalDestinationName.val().trim(),
+                address: modalDestinationAddress.val().trim(),
+                description: modalDestinationDescription.val().trim(),
+                website: modalDestinationWebsite.val().trim(),
+                image: modalDestinationImage.val().trim(),
+                phoneNumber: modalDestinationPhoneNumber.val().trim(),
+                category: modalDestinationCategory.val()
+            }
         })
-    })
+        .then(function() {
+            window.location.href = "/adminPage";
+        });
+    };
 
-// ***************  Using for example  ************************
-//Note: this was moved into the controllers file into a method
-    // $(document).on("click", "#approve", function(event) {
-    //     event.preventDefault();
-    //     var id = $(this).data("id");
-    //     // console.log("This is the ID: " + id);
+    //Pushes the new request to the database
+    function upsertModal(editModal) {
+        $.post("/adminPage", editModal)
+        .then(getDestinations);
+    };
 
-    //     $.ajax({
-    //         method: "PUT",
-    //         url: "/api/requestnewspot/",
-    //         data: { approved: true, id: id }
-    //     })
-    //     .then(function() {
-    //         window.location.href = "/adminPage";
-    //     });
-    // });
+    // Submit Edit Modal
+    $("#submitModalEdit").on("click", function(event) {
+        event.preventDefault();
+        console.log("why isn't this being logged?  this was hit");
+    });
+
 // ----------- Work in Progress End-------------------------------------
 
 
@@ -112,20 +121,24 @@ $(document).ready(function() {
                 rowsToAdd.push(createDestinationRow(data[i]));
             }
         });
-    }
+    };
+
+    // Removes Request from Database, Denied Request
     function handleLocationDelete(event) {
         event.preventDefault();
         var id = $(this).data("id");
         console.log("test");
         $.ajax({
-          method: "DELETE",
-          url: "/api/requestnewspot/" + id
+            method: "DELETE",
+            url: "/api/requestnewspot/" + id
         })
-          .then(function() {
+        .then(function() {
             window.location.href = "/adminPage";
-          });
-      }
-      function handleLocationUpdate() {
+        });
+    };
+
+    // Changes the Request to Approved in Database
+    function handleLocationUpdate() {
         event.preventDefault();
         var id = $(this).data("id");
         console.log("This is the ID: " + id);
@@ -133,10 +146,10 @@ $(document).ready(function() {
             method: "PUT",
             url: "/api/requestnewspot/",
             data: { approved: true, id: id }
-          })
-            .then(function() {
-              window.location.href = "/adminPage";
-            });
+        })
+        .then(function() {
+            window.location.href = "/adminPage";
+        });
     };
 });
 

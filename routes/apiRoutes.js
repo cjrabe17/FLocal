@@ -24,8 +24,8 @@ module.exports = function(app) {
     });
   });
 
-  // PUT route for updating locations
-  app.put("/api/requestnewspot", function(req, res) {
+  // PUT route for updating request
+  app.put("/adminPage", function(req, res) {
     console.log(req.body);
     db.Location.update(
       req.body,
@@ -37,6 +37,7 @@ module.exports = function(app) {
       res.json(dbLocations);
     });
   });
+
   //DELTE route for deleting locations
   app.delete("/api/requestnewspot/:id", function(req, res) {
     db.Location.destroy({
