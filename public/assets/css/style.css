@@ -17,8 +17,16 @@ main {
   flex: 1 0 auto;
 }
 
+.card .card-image img {
+  height: 200px;
+}
+
 .container {
   width: 100vw;
+}
+
+#navWrapper, #footer {
+  background-color: #e57d11;
 }
 
 a:hover {
