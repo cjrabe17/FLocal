@@ -1,5 +1,7 @@
 # FLocal
 
+![logo](https://user-images.githubusercontent.com/22801862/37550355-1af44a40-2962-11e8-9cf4-416e46be9e46.png)
+
 FLocal gives Snowbirds the opportunity to get the local Florida experience. Locals suggest hidden gems throughout Florida for administrators to approve.
 
 ## Built With
