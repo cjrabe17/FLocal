@@ -17,6 +17,14 @@ main {
   flex: 1 0 auto;
 }
 
+.card .card-content {
+  padding: 5px;
+}
+
+.card .sticky-action .col .s12 .m6 {
+  height: 300px;
+}
+
 .card .card-image img {
   height: 200px;
 }
