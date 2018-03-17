@@ -17,37 +17,33 @@ passport.deserializeUser((id, done) => {
 
 passport.use(
     new GoogleStrategy({
-        // options for the Google strategy
         callbackURL: "/auth/google/redirect",
         clientID: keys.google.clientID,
         clientSecret: keys.google.clientSecret
-    }, (accessToken, refreshToken, profile, done) => {
-        db.User.findOne({
-            where: {
-                googleId: profile.id
-            }
-        }).then(function(user) {
-            if (user) {
-                return done(null, false, {
-                    message: "that user already exists"
-                });
-            } else {
-                var data = {
-                    googleId: profile.id,
-                    username: profile.displayName,
-                    thumbnail: profile._json.image.url,
-                    adminAccess: false
-                };
-                db.User.create(data).then(function(newUser, created) {
-                    if (!newUser) {
-                        return done(null, false);
-                    }
-
-                    if (newUser) {
-                        return done(null, newUser);
-                    }
-                });
-            }
+    },
+    (accessToken, refreshToken, profile, done)=>{
+        // passport callback function
+        // check if user exists
+        db.User.findOne({where: {
+            googleId: profile.id
+        }
+    }).then(function(currentUser) {
+        if(currentUser){
+            // already have a user
+            console.log("Current user is: " + currentUser);
+            done(null, currentUser);
+        } else {
+            // if not, create user
+            db.User.create({
+                googleId: profile.id,
+                username: profile.displayName,
+                thumbnail: profile._json.image.url,
+                adminAccess: false
+            }).then(function(newUser) {
+                console.log("User created: " + newUser);
+                done(null, newUser.dataValues);
+            });
+        }
         });
     })
 )
