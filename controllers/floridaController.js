@@ -27,6 +27,9 @@ module.exports = {
   login: function(req, res) {
     res.render("login");
   },
+  editSpot: function(req, res) {
+    res.render("editPage");
+  },
   createUserForm: function(req, res) {
     res.render("createUserForm");
   },

@@ -2,12 +2,12 @@
 <div class="row col s12">
   {{#each locations}} 
     {{#unless approved}}
-      <div class="card sticky-action col s12 m6" style="margin:5px; width:250px">
+      <div class="card sticky-action col s12 m6" style="margin:10px; width:300px">
         <div class="card-image waves-effect waves-block waves-light">
           <img class="activator" src="{{this.image}}">
         </div>
         <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4">{{this.destination}}
+          <span class="card-title activator grey-text text-darken-4" style="font-size: 23px">{{this.destination}}
             <i class="material-icons right">more_vert</i>
           </span>
           <p>
@@ -33,10 +33,10 @@
       </div>
       <!-- Modal Structure -->
       <div id="modal{{ id }}" class="modal">
-        <div class="modal-content">
+        <div id="{{ id }}" class="modal-content">
           <h4>Edit {{this.destination}}</h4>
           <div class="row">
-            <form id="modalEdit" class="col s12">
+            <form id="modalEditForm" class="col s12">
               <div class="row modal-form-row">
                 <div class="input-field col s12">
                   <input id="modal_destination_name" type="text" value="{{this.destination}}">
@@ -120,7 +120,6 @@
                       <option value="6">Entertainment</option>
                     {{/unless}}
 
-
                     {{#if this.restaurant}}
                       <option value="7" selected>Restaurant</option>
                     {{/if}}
@@ -133,11 +132,13 @@
               </div>
             </form>
           </div>
+          <div class="modal-footer">
+            <button class="btn waves-effect waves-light right" form="modalEditForm" id="submitModalEdit">Make Changes
+            <i class="material-icons right">send</i>
+          </div>
+
         </div>
-        <div class="modal-footer">
-          <button class="btn waves-effect waves-light right" id="submitModalEdit" type="submit" name="submit">Make Changes
-          <i class="material-icons right">send</i>
-        </div>
+        
       </div>
     {{/unless}}
   {{/each}}

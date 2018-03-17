@@ -27,11 +27,12 @@ $(document).ready(function() {
     var modalDestinationImage = $("#modal_destination_image");
     var modalDestinationDescription = $("#modal_destination_description");
     var modalDestinationWebsite = $("#modal_destination_website");
-        
+    
+    var modalID;
 // Edits the Request in Database
 function editModal() {
     event.preventDefault();
-        var id = $(this).data("id");
+        id = $(this).data("id");
         console.log("This is the ID in the modal: " + id);
         $.ajax({
             method: "PUT",
@@ -52,15 +53,29 @@ function editModal() {
         });
     };
 
+    // console.log(modalID);
+    
     //Pushes the new request to the database
     function upsertModal(editModal) {
         $.post("/adminPage", editModal)
         .then(getDestinations);
     };
 
-    // Submit Edit Modal
-    $("#submitModalEdit").on("click", function(event) {
+    $(document).on("click", "#submitModalEdit", function(event) {
         event.preventDefault();
+        modalID = "modal" + ($(this).data("id"));
+        id = $(this).data("id");
+        console.log("xxxx" + modalID);
+        console.log("yyyyy" + id);
+    });
+
+    // Submit Edit Modal
+    $(document).on("click", "#edit", function(event) {
+        event.preventDefault();
+        modalID = "modal" + ($(this).data("id"));
+        id = $(this).data("id");
+        console.log(modalID);
+        console.log(id);
         console.log("why isn't this being logged?  this was hit");
     });
 
