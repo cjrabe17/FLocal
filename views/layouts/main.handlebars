@@ -18,7 +18,7 @@
         <nav id="navWrapper">
             <div  class="nav-wrapper container">
                 <a href="/" class="brand-logo">
-                   FLocal
+                   <img id="logo" src="/assets/img/logo.png" alt="FLocal Logo">
                 </a>   
                 <ul class="right">               
                     <li>    
@@ -44,7 +44,7 @@
                         </div>          
                     </li>
                     <li>
-                        <a href="/requestnewspot" class="white-text">Request New Destination</a>
+                        <a href="/requestnewspot" class="white-text">Suggest New Spot</a>
                     </li>
                     {{#if user}}                   
                     <li>
@@ -69,6 +69,9 @@
         </nav>    
 
         <main class="container">
+            <div class="center-align">
+                <img id="largeLogo" src="/assets/img/logo.png" alt="FLocal Logo">
+            </div>
             {{{body}}}
         </main>
 
