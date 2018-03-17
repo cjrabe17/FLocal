@@ -25,7 +25,7 @@ module.exports = function(app) {
   });
 
   // PUT route for updating request
-  app.put("/adminPage", function(req, res) {
+  app.put("/api/requestnewspot", function(req, res) {
     console.log(req.body);
     db.Location.update(
       req.body,

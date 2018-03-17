@@ -45,3 +45,12 @@ a:hover {
 .page-footer .footer-copyright {
   background-color: #ee6e73;
 }
+
+#logo {
+  height: 60px;
+}
+
+#largeLogo {
+  height: 13em;
+  margin: 1em;
+}
