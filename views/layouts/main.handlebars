@@ -15,8 +15,8 @@
 
 	</head>
 	<body>
-        <nav>
-            <div class="nav-wrapper container">
+        <nav id="navWrapper">
+            <div  class="nav-wrapper container">
                 <a href="/" class="brand-logo">
                    FLocal
                 </a>   
@@ -45,7 +45,7 @@
                         <a href="/auth/login" class="white-text">Login</a>
                     </li>
                     {{/if}}
-                    <li>
+                    {{!-- <li>
                         <a href="/adminPage" class="white-text">Admin Page</a>
                     </li> --}}
                     <li>
@@ -63,7 +63,7 @@
         </main>
 
         <footer class="page-footer">
-          <div class="footer-copyright">
+          <div id="footer" class="footer-copyright">
             <div class="container">
                 © 2018 Copyright Text
                 <a class="white-text right" href="https://github.com/cjrabe17/project2" target="_blank"> &nbsp Github Repo </a>
